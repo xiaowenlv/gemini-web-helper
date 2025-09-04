@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini网页助手",
+  "version": "1.0",
+  "description": "一个可以总结网页和YouTube视频的AI助手。",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon128.png"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "host_permissions": [
+    "https://generativelanguage.googleapis.com/"
+  ]
+}

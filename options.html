@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>设置</title>
+  <style>
+    body { font-family: sans-serif; padding: 10px 20px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; }
+    input, select { width: 300px; padding: 5px; }
+    button { padding: 8px 15px; margin-right: 10px;}
+    #status { 
+      margin-top: 10px; 
+      padding: 10px;
+      border-radius: 5px;
+      display: none; /* 默认隐藏 */
+    }
+    .success { color: green; background-color: #e9f5e9; }
+    .error { color: red; background-color: #fdecec; }
+  </style>
+</head>
+<body>
+  <h1>设置</h1>
+
+  <div class="form-group">
+    <label for="apiKey">Google AI Studio API Key:</label>
+    <input type="password" id="apiKey">
+  </div>
+
+  <div class="form-group">
+    <label for="model">选择模型 (遵照最新官方文档):</label>
+    <select id="model">
+      <option value="gemini-2.5-flash">2.5 Flash (推荐)</option>
+      <option value="gemini-2.5-pro">2.5 Pro</option>
+      <option value="gemini-2.5-flash-lite">2.5 Flash-Lite</option>
+    </select>
+  </div>
+
+  <button id="save">保存</button>
+  <button id="test">测试连接</button>
+  <div id="status"></div>
+
+  <script src="options.js"></script>
+</body>
+</html>

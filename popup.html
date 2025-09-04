@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Gemini网页助手</title>
+  <style>
+    body {
+      width: 380px; /* Widened for better layout */
+      font-family: sans-serif;
+      margin: 0;
+      padding: 15px;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+    #main-container {
+      position: relative; /* For positioning the copy button */
+    }
+    #status-message {
+      text-align: center;
+      padding: 20px;
+      color: #555;
+    }
+    #result-container {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background-color: #ffffff;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      max-height: 250px;
+      overflow-y: auto;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    #copy-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: #e0e0e0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 12px;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    #main-container:hover #copy-button {
+      opacity: 1;
+    }
+    #follow-up-container {
+      margin-top: 15px;
+      display: flex;
+    }
+    #question-input {
+      flex-grow: 1;
+      border: 1px solid #ccc;
+      border-radius: 5px 0 0 5px;
+      padding: 8px;
+      font-size: 14px;
+    }
+    #send-button {
+      border: 1px solid #4285f4;
+      background-color: #4285f4;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="main-container">
+    <div id="status-message">正在初始化...</div>
+    <div id="result-container" class="hidden"></div>
+    <button id="copy-button" class="hidden" title="拷贝总结">📋</button>
+  </div>
+  
+  <div id="follow-up-container" class="hidden">
+    <input type="text" id="question-input" placeholder="继续提问...">
+    <button id="send-button">发送</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
