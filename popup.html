@@ -4,88 +4,69 @@
   <meta charset="UTF-8">
   <title>Gemini网页助手</title>
   <style>
-    body {
-      width: 380px; /* Widened for better layout */
-      font-family: sans-serif;
-      margin: 0;
-      padding: 15px;
-      background-color: #f4f6f8;
-      color: #333;
+    /* All styles remain the same */
+    body { width: 400px; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; height: 500px; background-color: #f0f2f5; }
+    #chat-container { flex-grow: 1; overflow-y: auto; padding: 10px; }
+    .message { margin-bottom: 10px; padding: 8px 12px; border-radius: 18px; max-width: 80%; word-wrap: break-word; line-height: 1.5; position: relative; /*
+    <-- [新增] 为按钮定位设置父级相对定位 */
     }
-    #main-container {
-      position: relative; /* For positioning the copy button */
-    }
-    #status-message {
-      text-align: center;
-      padding: 20px;
-      color: #555;
-    }
-    #result-container {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      background-color: #ffffff;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #e0e0e0;
-      max-height: 250px;
-      overflow-y: auto;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    #copy-button {
+    .message p { margin: 0 0 5px 0; } 
+    .message ul, .message ol { padding-left: 20px; margin: 5px 0; }
+    .user-message { background-color: #0084ff; color: white; align-self: flex-end; margin-left: auto; }
+    .model-message { background-color: #e4e6eb; color: #050505; align-self: flex-start; padding-right: 35px; /* <-- [修改]
+    为按钮留出空间 */ }
+    #follow-up-container { display: flex; padding: 10px; border-top: 1px solid #ddd; background-color: #fff; }
+    #question-input { flex-grow: 1; border: 1px solid #ccc; border-radius: 18px; padding: 8px 15px; font-size: 14px; margin-right: 10px; }
+    #send-button { border: none; background-color: #0084ff; color: white; padding: 8px 15px; border-radius: 18px; cursor: pointer; font-size: 14px; }
+    #status-message { text-align: center; padding: 20px; color: #555; }
+    #footer { text-align: center; padding: 5px 10px; border-top: 1px solid #ddd; background-color: #fff; }
+    #settings-link { font-size: 12px; color: #65676b; cursor: pointer; text-decoration: none; }
+    #settings-link:hover { text-decoration: underline; }
+    .hidden { display: none; }
+
+    /* --- [新增] 新的复制按钮样式 --- */
+    .copy-btn {
       position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: #e0e0e0;
+      bottom: 5px;
+      right: 8px;
+      background: none;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
-      padding: 4px 8px;
-      font-size: 12px;
-      opacity: 0.5;
+      font-size: 16px;
+      color: #555;
+      padding: 2px;
+      opacity: 0.5; /* 默认半透明，不那么突兀 */
       transition: opacity 0.2s;
     }
-    #main-container:hover #copy-button {
-      opacity: 1;
+    .model-message:hover .copy-btn {
+      opacity: 1; /* 鼠标悬停在消息上时，按钮完全显示 */
     }
-    #follow-up-container {
-      margin-top: 15px;
-      display: flex;
+    .copy-btn:hover {
+      background-color: rgba(0,0,0,0.1); /* 按钮悬停时有背景反馈 */
+      border-radius: 4px;
     }
-    #question-input {
-      flex-grow: 1;
-      border: 1px solid #ccc;
-      border-radius: 5px 0 0 5px;
-      padding: 8px;
-      font-size: 14px;
-    }
-    #send-button {
-      border: 1px solid #4285f4;
-      background-color: #4285f4;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 0 5px 5px 0;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    .hidden {
-      display: none;
-    }
+    /* --- 样式新增结束 --- */
+
   </style>
 </head>
 <body>
 
-  <div id="main-container">
-    <div id="status-message">正在初始化...</div>
-    <div id="result-container" class="hidden"></div>
-    <button id="copy-button" class="hidden" title="拷贝总结">📋</button>
+  <div id="chat-container">
+    <div id="status-message">正在连接Gemini...</div>
   </div>
   
   <div id="follow-up-container" class="hidden">
-    <input type="text" id="question-input" placeholder="继续提问...">
+    <input type="text" id="question-input" placeholder="输入你的问题...">
     <button id="send-button">发送</button>
+    <!-- [删除] 旧的全局复制按钮已被移除 -->
   </div>
 
+  <div id="footer" class="hidden">
+    <a id="settings-link">设置</a>
+  </div>
+
+  <!-- --- IMPORTANT: Load the new library BEFORE our own script --- -->
+  <script src="lib/marked.min.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
